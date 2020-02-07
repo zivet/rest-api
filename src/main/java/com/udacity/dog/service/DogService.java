@@ -12,4 +12,6 @@ public interface DogService {
     Optional<Dog> getById(Long id);
 
     List<String> getNames();
+
+    String getBreedById(Long id);
 }

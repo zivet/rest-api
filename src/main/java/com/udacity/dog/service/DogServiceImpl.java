@@ -5,6 +5,7 @@ import com.udacity.dog.repository.DogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -22,14 +23,16 @@ public class DogServiceImpl implements DogService{
 
     @Override
     public Optional<Dog> getById(Long id) {
-        Optional<Dog> dog = dogRepository.findById(id);
-        return dog;
+        return dogRepository.findById(id);
     }
 
     @Override
     public List<String> getNames() {
-        List<String> names = new ArrayList<>();
-        dogRepository.findAll().forEach(d -> names.add(d.getName()));
-        return names;
+        return dogRepository.findName();
+    }
+
+    @Override
+    public String getBreedById(Long id) {
+        return dogRepository.findBreedById(id);
     }
 }
