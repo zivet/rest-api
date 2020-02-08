@@ -5,8 +5,6 @@ import com.udacity.dog.repository.DogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,8 +20,10 @@ public class DogServiceImpl implements DogService{
     }
 
     @Override
-    public Optional<Dog> getById(Long id) {
-        return dogRepository.findById(id);
+    public Dog getById(Long id) {
+        Optional<Dog> optionalDog = dogRepository.findById(id);
+        Dog dog = optionalDog.orElseThrow(DogNotFoundException::new);
+        return dog;
     }
 
     @Override
@@ -33,6 +33,8 @@ public class DogServiceImpl implements DogService{
 
     @Override
     public String getBreedById(Long id) {
-        return dogRepository.findBreedById(id);
+        Optional<String> optionalBreed = Optional.ofNullable(dogRepository.findBreedById(id));
+        String breed = optionalBreed.orElseThrow(DogNotFoundException::new);
+        return breed;
     }
 }
