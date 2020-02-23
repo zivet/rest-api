@@ -7,6 +7,7 @@ import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,12 +32,14 @@ public class DogController {
         return new ResponseEntity<>(dogList, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('MANAGER')")
     @GetMapping(value = "/dog")
     public ResponseEntity<Dog> getDogById(@RequestParam(value = "id", required = true) Long id) {
         Dog dog = dogService.getById(id);
         return new ResponseEntity<>(dog, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('MANAGER') OR hasRole('USER')")
     @GetMapping(value = "/dogs/name")
     public ResponseEntity<List<String>> getDogNames() {
         List<String> dogNames = dogService.getNames();
