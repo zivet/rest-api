@@ -2,6 +2,8 @@ package com.udacity.dog.web;
 
 import com.udacity.dog.entity.Dog;
 import com.udacity.dog.service.DogService;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
+@ApiResponses(value = {
+        @ApiResponse(code = 400, message = "This is a bad request"),
+        @ApiResponse(code = 401, message = "You are not authorized"),
+        @ApiResponse(code = 404, message = "Resource not fount"),
+        @ApiResponse(code = 500, message = "Server is down")
+})
 public class DogController {
 
     @Autowired
