@@ -59,4 +59,14 @@ public class Dog {
     public void setOrigin(String origin) {
         this.origin = origin;
     }
+
+    @Override
+    public String toString() {
+        return "Dog{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", breed='" + breed + '\'' +
+                ", origin='" + origin + '\'' +
+                '}';
+    }
 }
